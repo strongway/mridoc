@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# using dcm2bids to convert dicom to nifti
+# run this in the root directory of the project
+subfiles=(`ls sourcedata/`) 
+for subfile in ${subfiles[@]}
+do
+    echo processing $subfile
+    dcm2bids -d sourcedata/${subfile} -p $subfile -c code/bids_config.json
+done
+
+# rename the nifti files to match the bids format
+# loop through the subject folders 'sub-xx'
+#subfolders=(`ls -d sub-*`)
+#for subfolder in ${subfolders[@]}
+# list the files in the subject folder 'func' under the subject folder
+#do
+#    files=(`ls $subfolder/func/`)
+#    for file in ${files[@]}
+#    do
+        # rename the files with insersion of '_task-bisect_run-01' before '_bold'
+        # the new file name will be 'sub-xx_task-bisect_run-01_bold.nii.gz'
+#        echo renaming to ${file/_bold/_task-bisect_run-01_bold}
+#        mv $subfolder/func/$file $subfolder/func/${file/_bold/_task-bisect_run-01_bold}
+#    done
+#done
+
