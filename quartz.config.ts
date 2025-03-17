@@ -8,7 +8,7 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "MSense Lab",
+    pageTitle: "Lab Tutorials",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,

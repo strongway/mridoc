@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0">
     <channel>
-      <title>MSense Lab</title>
+      <title>Lab Tutorials</title>
       <link>https://quartz.jzhao.xyz</link>
-      <description>Last 10 notes on MSense Lab</description>
+      <description>Last 10 notes on Lab Tutorials</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
+    <title>vnc</title>
+    <link>https://quartz.jzhao.xyz/knowledge/vnc</link>
+    <guid>https://quartz.jzhao.xyz/knowledge/vnc</guid>
+    <description>Virtual Network Computing (VNC) is a remote desktop-sharing technology that enables you to control another computer over a network.</description>
+    <pubDate>Mon, 17 Mar 2025 22:26:15 GMT</pubDate>
+  </item><item>
+    <title>git-annex</title>
+    <link>https://quartz.jzhao.xyz/knowledge/git-annex</link>
+    <guid>https://quartz.jzhao.xyz/knowledge/git-annex</guid>
+    <description>git annex tips To ensure that your CSV files are managed by Git and not by git-annex, you can use the git annex unannex command to convert files that are currently managed by git-annex back to being managed by Git.</description>
+    <pubDate>Mon, 17 Mar 2025 22:23:45 GMT</pubDate>
+  </item><item>
     <title>2.1 MRI Data Preparation</title>
     <link>https://quartz.jzhao.xyz/fMRI-Tutorial/2.1-MRI-Data-Preparation</link>
     <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/2.1-MRI-Data-Preparation</guid>
@@ -18,16 +30,10 @@
     <description>Before doing first-level analysis, you must run brain extraction using BET, ensure your functional and structural data are in NIFTI format, and ensure that you have any necessary event timing files (e.g., stimulus onset, durations).</description>
     <pubDate>Sun, 16 Mar 2025 20:43:43 GMT</pubDate>
   </item><item>
-    <title>Index</title>
-    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/Index</link>
-    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/Index</guid>
-    <description></description>
-    <pubDate>Sun, 16 Mar 2025 20:12:02 GMT</pubDate>
-  </item><item>
     <title>3.1 Hemodynamic Response Function and GLM</title>
     <link>https://quartz.jzhao.xyz/fMRI-Tutorial/3.1-Hemodynamic-Response-Function-and-GLM</link>
     <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/3.1-Hemodynamic-Response-Function-and-GLM</guid>
-    <description>Hemodynamic response function The most widely used fMRI analysis is the general linear model (GLM) capitalizes on the changes in blood flow and oxygenation associated with neural activity (the hemodynamic response), and on the differing magnetic properties of oxygenated and deoxygenated blood.</description>
+    <description>Hemodynamic response function 1 The most widely used fMRI analysis is the general linear model (GLM) capitalizes on the changes in blood flow and oxygenation associated with neural activity (the hemodynamic response), and on the differing magnetic properties of oxygenated and deoxygenated blood.</description>
     <pubDate>Sun, 16 Mar 2025 20:11:28 GMT</pubDate>
   </item><item>
     <title>1.4 Neurocommand</title>
@@ -51,7 +57,7 @@
     <title>2.3 Preprocessing with fmriPrep</title>
     <link>https://quartz.jzhao.xyz/fMRI-Tutorial/2.3-Preprocessing-with-fmriPrep</link>
     <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/2.3-Preprocessing-with-fmriPrep</guid>
-    <description>A standard preprocessing pipline of fMRI data looks as theh follows: flowchart TD A[Raw Data] --&gt; B[Distortion corretion] B --&gt; C[Slice-Timing correction] A --&gt; C C --&gt; D[Registration and Normalization] D --&gt; E[Alignment and Motion Correction] E --&gt; F[Spatial Smoothing] F --&gt; G[...</description>
+    <description>A standard preprocessing pipeline of fMRI data looks as the follows: flowchart TD A[Raw Data] --&gt; B[Distortion corretion] B --&gt; C[Slice-Timing correction] A --&gt; C C --&gt; D[Registration and Normalization] D --&gt; E[Alignment and Motion Correction] E --&gt; F[Spatial Smoothing] F --&gt; G[...</description>
     <pubDate>Sun, 16 Mar 2025 18:53:43 GMT</pubDate>
   </item><item>
     <title>2.2 BIDS Structure</title>
@@ -59,12 +65,6 @@
     <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/2.2-BIDS-Structure</guid>
     <description>BIDS stands for the Brain Imaging Data Structure, which is a simple and intuitive way to organize and describe your data.</description>
     <pubDate>Sun, 16 Mar 2025 18:53:21 GMT</pubDate>
-  </item><item>
-    <title>1.3 Cloud Computing</title>
-    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/1.3-Cloud-Computing-and-Access</link>
-    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/1.3-Cloud-Computing-and-Access</guid>
-    <description>aThe following information is useful for those who can access Linux cluster at LRZ.de Access Cloud Computing Msense Lab also has two cloud computing running Lora and Emma.</description>
-    <pubDate>Sun, 16 Mar 2025 18:52:38 GMT</pubDate>
   </item>
     </channel>
   </rss>
