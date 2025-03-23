@@ -1,1 +1,0 @@
-Virtual Network Computing ([VNC](https://en.wikipedia.org/wiki/VNC)) is a remote desktop-sharing technology that enables you to control another computer over a network. VNC is platform-independent, with clients and servers for many GUI-based operating systems. 

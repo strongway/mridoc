@@ -1,3 +1,8 @@
+---
+title: git-annex
+draft: false
+tags:
+---
 ## git annex tips
 
 To ensure that your CSV files are managed by Git and not by `git-annex`, you can use the `git annex unannex` command to convert files that are currently managed by `git-annex` back to being managed by Git. After using `unannex`, you will commit the change to record the fact that these files are no longer managed by `git-annex`.

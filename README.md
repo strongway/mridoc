@@ -1,18 +1,24 @@
-# Quartz v4
+This is a GitHub repository based on [Quartz 4](https://quartz.jzhao.xyz/)), converting my Lab fMRI tutorial material to the static website (https://mri.msense.de).  
 
-> “[One] who works with the door open gets all kinds of interruptions, but [they] also occasionally gets clues as to what the world is and what might be important.” — Richard Hamming
+Some useful actions for updating website:
 
-Quartz is a set of tools that helps you publish your [digital garden](https://jzhao.xyz/posts/networked-thought) and notes as a website for free.
-Quartz v4 features a from-the-ground rewrite focusing on end-user extensibility and ease-of-use.
+## Building Quartz
 
-🔗 Read the documentation and get started: https://quartz.jzhao.xyz/
+```bash
+npx quartz build --serve
 
-[Join the Discord Community](https://discord.gg/cRFFHYye7t)
+```
+Open a web browser and visit `http://localhost:8080` to view it. 
 
-## Sponsors
+## Commit Changes
 
-<p align="center">
-  <a href="https://github.com/sponsors/jackyzha0">
-    <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
-  </a>
-</p>
+```bash
+npx quartz sync
+
+```
+
+Sometime additional sync can be done via VS Code git plugin. 
+
+
+Lab website: https://msense.de
+

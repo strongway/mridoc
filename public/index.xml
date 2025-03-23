@@ -6,65 +6,65 @@
       <description>Last 10 notes on Lab Tutorials</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>vnc</title>
-    <link>https://quartz.jzhao.xyz/knowledge/vnc</link>
-    <guid>https://quartz.jzhao.xyz/knowledge/vnc</guid>
-    <description>Virtual Network Computing (VNC) is a remote desktop-sharing technology that enables you to control another computer over a network.</description>
-    <pubDate>Mon, 17 Mar 2025 22:26:15 GMT</pubDate>
+    <title>Tips and Tricks</title>
+    <link>https://quartz.jzhao.xyz/knowledge/Tips-and-Tricks</link>
+    <guid>https://quartz.jzhao.xyz/knowledge/Tips-and-Tricks</guid>
+    <description>Neurocommand in Linux Cluster Install Container Search and install Specific Containers bash containers.sh fmriprep The above will give you options of which specific containers you want to install.</description>
+    <pubDate>Fri, 21 Mar 2025 09:06:24 GMT</pubDate>
   </item><item>
-    <title>git-annex</title>
-    <link>https://quartz.jzhao.xyz/knowledge/git-annex</link>
-    <guid>https://quartz.jzhao.xyz/knowledge/git-annex</guid>
-    <description>git annex tips To ensure that your CSV files are managed by Git and not by git-annex, you can use the git annex unannex command to convert files that are currently managed by git-annex back to being managed by Git.</description>
-    <pubDate>Mon, 17 Mar 2025 22:23:45 GMT</pubDate>
+    <title>4. fMRIPrep and FitLins</title>
+    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/4.-fMRIPrep-and-FitLins</link>
+    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/4.-fMRIPrep-and-FitLins</guid>
+    <description>1. Preprocessing with fMRIPrep fMRIPrep is a robust and standardized pipeline for fMRI data.</description>
+    <pubDate>Thu, 20 Mar 2025 15:59:07 GMT</pubDate>
   </item><item>
-    <title>2.1 MRI Data Preparation</title>
-    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/2.1-MRI-Data-Preparation</link>
-    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/2.1-MRI-Data-Preparation</guid>
-    <description>2.1.1 MRI sequence Types of MRI data depend on what MRI sequence you use.</description>
-    <pubDate>Sun, 16 Mar 2025 20:51:47 GMT</pubDate>
-  </item><item>
-    <title>3.2 First-level Analysis with FSL</title>
-    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/3.2-First-level-Analysis-with-FSL</link>
-    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/3.2-First-level-Analysis-with-FSL</guid>
-    <description>Before doing first-level analysis, you must run brain extraction using BET, ensure your functional and structural data are in NIFTI format, and ensure that you have any necessary event timing files (e.g., stimulus onset, durations).</description>
-    <pubDate>Sun, 16 Mar 2025 20:43:43 GMT</pubDate>
+    <title>3.3 High-level Analysis with FSL</title>
+    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/3.3-High-level-Analysis-with-FSL</link>
+    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/3.3-High-level-Analysis-with-FSL</guid>
+    <description>High-level analysis in FSL aggregates results from individual subjects to draw inferences about a population.</description>
+    <pubDate>Thu, 20 Mar 2025 15:32:36 GMT</pubDate>
   </item><item>
     <title>3.1 Hemodynamic Response Function and GLM</title>
     <link>https://quartz.jzhao.xyz/fMRI-Tutorial/3.1-Hemodynamic-Response-Function-and-GLM</link>
     <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/3.1-Hemodynamic-Response-Function-and-GLM</guid>
     <description>Hemodynamic response function 1 The most widely used fMRI analysis is the general linear model (GLM) capitalizes on the changes in blood flow and oxygenation associated with neural activity (the hemodynamic response), and on the differing magnetic properties of oxygenated and deoxygenated blood.</description>
-    <pubDate>Sun, 16 Mar 2025 20:11:28 GMT</pubDate>
-  </item><item>
-    <title>1.4 Neurocommand</title>
-    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/1.4-Neurocommand</link>
-    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/1.4-Neurocommand</guid>
-    <description>Neurocommand is a command-line interface to Neurodesk, which is designed to run on virtual machine or HPC.</description>
-    <pubDate>Sun, 16 Mar 2025 20:06:23 GMT</pubDate>
-  </item><item>
-    <title>MSense Lab fMRI Tutorial</title>
-    <link>https://quartz.jzhao.xyz/</link>
-    <guid>https://quartz.jzhao.xyz/</guid>
-    <description>This tutorial draws from a series of sessions held during our lab seminar. The content is regularly updated.</description>
-    <pubDate>Sun, 16 Mar 2025 19:14:09 GMT</pubDate>
-  </item><item>
-    <title>2.4 Quality Control with MRIQC</title>
-    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/2.4-Quality-Control-with-MRIQC</link>
-    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/2.4-Quality-Control-with-MRIQC</guid>
-    <description>MRIQC extracts no-reference IQMs (image quality metrics) from structural (T1w and T2w) and functional MRI (magnetic resonance imaging) data.</description>
-    <pubDate>Sun, 16 Mar 2025 18:53:50 GMT</pubDate>
+    <pubDate>Mon, 17 Mar 2025 22:56:08 GMT</pubDate>
   </item><item>
     <title>2.3 Preprocessing with fmriPrep</title>
     <link>https://quartz.jzhao.xyz/fMRI-Tutorial/2.3-Preprocessing-with-fmriPrep</link>
     <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/2.3-Preprocessing-with-fmriPrep</guid>
     <description>A standard preprocessing pipeline of fMRI data looks as the follows: flowchart TD A[Raw Data] --&gt; B[Distortion corretion] B --&gt; C[Slice-Timing correction] A --&gt; C C --&gt; D[Registration and Normalization] D --&gt; E[Alignment and Motion Correction] E --&gt; F[Spatial Smoothing] F --&gt; G[...</description>
-    <pubDate>Sun, 16 Mar 2025 18:53:43 GMT</pubDate>
+    <pubDate>Mon, 17 Mar 2025 22:41:58 GMT</pubDate>
   </item><item>
     <title>2.2 BIDS Structure</title>
     <link>https://quartz.jzhao.xyz/fMRI-Tutorial/2.2-BIDS-Structure</link>
     <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/2.2-BIDS-Structure</guid>
     <description>BIDS stands for the Brain Imaging Data Structure, which is a simple and intuitive way to organize and describe your data.</description>
-    <pubDate>Sun, 16 Mar 2025 18:53:21 GMT</pubDate>
+    <pubDate>Mon, 17 Mar 2025 22:41:37 GMT</pubDate>
+  </item><item>
+    <title>2.1 MRI Data Preparation</title>
+    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/2.1-MRI-Data-Preparation</link>
+    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/2.1-MRI-Data-Preparation</guid>
+    <description>2.1.1 MRI sequence Types of MRI data depend on what MRI sequence you use.</description>
+    <pubDate>Mon, 17 Mar 2025 22:40:35 GMT</pubDate>
+  </item><item>
+    <title>1.4 Neurocommand</title>
+    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/1.4-Neurocommand</link>
+    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/1.4-Neurocommand</guid>
+    <description>Neurocommand is a command-line interface to Neurodesk, which is designed to run on virtual machine or HPC.</description>
+    <pubDate>Mon, 17 Mar 2025 22:37:51 GMT</pubDate>
+  </item><item>
+    <title>1.3 Cloud Computing</title>
+    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/1.3-Cloud-Computing-and-Access</link>
+    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/1.3-Cloud-Computing-and-Access</guid>
+    <description>aThe following information is useful for those who can access Linux cluster at LRZ.de Access Cloud Computing Msense Lab also has two cloud computing systems, Lora and Emma.</description>
+    <pubDate>Mon, 17 Mar 2025 22:32:56 GMT</pubDate>
+  </item><item>
+    <title>1.2 GNode and Datalad</title>
+    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/1.2-GNode-and-Datalad</link>
+    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/1.2-GNode-and-Datalad</guid>
+    <description>1.</description>
+    <pubDate>Mon, 17 Mar 2025 22:24:27 GMT</pubDate>
   </item>
     </channel>
   </rss>
