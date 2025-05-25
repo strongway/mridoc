@@ -6,65 +6,65 @@
       <description>Last 10 notes on Lab Tutorials</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
+    <title>5.2 Visualization and Statistical Thresholding with Nilearn</title>
+    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/5.2-Visualization-and-Statistical-Thresholding-with-Nilearn</link>
+    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/5.2-Visualization-and-Statistical-Thresholding-with-Nilearn</guid>
+    <description>This tutorial assumes you have precomputed second-level fMRI statistical maps. 1.</description>
+    <pubDate>Sun, 25 May 2025 09:09:41 GMT</pubDate>
+  </item><item>
+    <title>1. MRI Basics</title>
+    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/1.-MRI-Basics</link>
+    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/1.-MRI-Basics</guid>
+    <description>Principles of Magnetic Resonance Magnetic Resonance Imaging (MRI) is based on the behavior of nuclear spins in a strong magnetic field.</description>
+    <pubDate>Mon, 19 May 2025 06:48:28 GMT</pubDate>
+  </item><item>
     <title>3.2 General Linear Model</title>
     <link>https://quartz.jzhao.xyz/fMRI-Tutorial/3.2-General-Linear-Model-(GLM)</link>
     <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/3.2-General-Linear-Model-(GLM)</guid>
     <description>1.</description>
-    <pubDate>Sun, 18 May 2025 20:51:40 GMT</pubDate>
+    <pubDate>Sun, 18 May 2025 22:51:39 GMT</pubDate>
+  </item><item>
+    <title>1.1 BOLD Signals and HRF</title>
+    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/1.1-BOLD-Signal-and-HRF</link>
+    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/1.1-BOLD-Signal-and-HRF</guid>
+    <description>Hemoglobin and the Basis of the BOLD Signal Functional MRI (fMRI) often relies on the Blood-Oxygen-Level-Dependent (BOLD) contrast mechanism to detect brain activity.</description>
+    <pubDate>Sun, 18 May 2025 20:51:34 GMT</pubDate>
   </item><item>
     <title>5.1 NiLearn fMRI Basic Analysis</title>
     <link>https://quartz.jzhao.xyz/fMRI-Tutorial/5.1-NiLearn-fMRI-Basic-Analysis</link>
     <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/5.1-NiLearn-fMRI-Basic-Analysis</guid>
     <description>0 Prerequisites RequirementWhy you need itPython ≥ 3.9 with nilearn 0.12+, numpy, pandas, scipy, nibabel, joblibCore librariesfMRIPrep-pre-processed data (BIDS derivatives)Gives you: *_desc-preproc_bold.nii.gz, *_desc-brain_mask.nii.gz, *_events.tsv, *_confounds_timeseries.tsvAn MNI brain mask (e.g.</description>
-    <pubDate>Mon, 05 May 2025 06:13:32 GMT</pubDate>
-  </item><item>
-    <title>1.3 Cloud Computing</title>
-    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/1.3-Cloud-Computing-and-Access</link>
-    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/1.3-Cloud-Computing-and-Access</guid>
-    <description>The following information is useful for those who can access Linux cluster at LRZ.de Access Cloud Computing Msense Lab also has two cloud computing systems, Lora and Emma.</description>
-    <pubDate>Fri, 04 Apr 2025 13:58:52 GMT</pubDate>
-  </item><item>
-    <title>2.5 fMRIPrep and FitLins</title>
-    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/2.5-fMRIPrep-and-FitLins</link>
-    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/2.5-fMRIPrep-and-FitLins</guid>
-    <description>1. Preprocessing with fMRIPrep fMRIPrep is a robust and standardized pipeline for fMRI data.</description>
-    <pubDate>Sun, 23 Mar 2025 21:48:33 GMT</pubDate>
-  </item><item>
-    <title>1.1 Basic Linux Commands</title>
-    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/1.1-Basic-Linux-Commands</link>
-    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/1.1-Basic-Linux-Commands</guid>
-    <description>1 Basic commands Shells such as Bash, Zsh, and Tcsh provide powerful command-line environments for Unix-like systems, each with its own syntax and features.</description>
-    <pubDate>Sun, 23 Mar 2025 19:34:19 GMT</pubDate>
-  </item><item>
-    <title>Tips and Tricks</title>
-    <link>https://quartz.jzhao.xyz/knowledge/Tips-and-Tricks</link>
-    <guid>https://quartz.jzhao.xyz/knowledge/Tips-and-Tricks</guid>
-    <description>Neurocommand in Linux Cluster Install Container Search and install Specific Containers bash containers.sh fmriprep The above will give you options of which specific containers you want to install.</description>
-    <pubDate>Fri, 21 Mar 2025 13:27:06 GMT</pubDate>
-  </item><item>
-    <title>git-annex</title>
-    <link>https://quartz.jzhao.xyz/knowledge/git-annex</link>
-    <guid>https://quartz.jzhao.xyz/knowledge/git-annex</guid>
-    <description>git annex tips To ensure that your CSV files are managed by Git and not by git-annex, you can use the git annex unannex command to convert files that are currently managed by git-annex back to being managed by Git.</description>
-    <pubDate>Fri, 21 Mar 2025 09:53:18 GMT</pubDate>
+    <pubDate>Sun, 18 May 2025 20:51:08 GMT</pubDate>
   </item><item>
     <title>4.2 High-level Analysis with FSL</title>
     <link>https://quartz.jzhao.xyz/fMRI-Tutorial/4.2-High-level-Analysis-with-FSL</link>
     <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/4.2-High-level-Analysis-with-FSL</guid>
     <description>High-level analysis in FSL aggregates results from individual subjects to draw inferences about a population.</description>
-    <pubDate>Fri, 21 Mar 2025 09:51:56 GMT</pubDate>
+    <pubDate>Sun, 18 May 2025 20:50:33 GMT</pubDate>
   </item><item>
     <title>4.1 First-level Analysis with FSL</title>
     <link>https://quartz.jzhao.xyz/fMRI-Tutorial/4.1-First-level-Analysis-with-FSL</link>
     <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/4.1-First-level-Analysis-with-FSL</guid>
     <description>Before doing first-level analysis, you must run brain extraction using BET, ensure your functional and structural data are in NIFTI format, and ensure that you have any necessary event timing files (e.g., stimulus onset, durations).</description>
-    <pubDate>Fri, 21 Mar 2025 09:51:42 GMT</pubDate>
+    <pubDate>Sun, 18 May 2025 20:50:03 GMT</pubDate>
   </item><item>
-    <title>3.1 Hemodynamic Response Function and GLM</title>
-    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/3.1-Hemodynamic-Response-Function</link>
-    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/3.1-Hemodynamic-Response-Function</guid>
-    <description>Hemodynamic response function 1 The most widely used fMRI analysis is the general linear model (GLM) capitalizes on the changes in blood flow and oxygenation associated with neural activity (the hemodynamic response), and on the differing magnetic properties of oxygenated and deoxygenated blood.</description>
-    <pubDate>Fri, 21 Mar 2025 09:51:29 GMT</pubDate>
+    <title>2.5 fMRIPrep and FitLins</title>
+    <link>https://quartz.jzhao.xyz/fMRI-Tutorial/2.5-fMRIPrep-and-FitLins</link>
+    <guid>https://quartz.jzhao.xyz/fMRI-Tutorial/2.5-fMRIPrep-and-FitLins</guid>
+    <description>1. Preprocessing with fMRIPrep fMRIPrep is a robust and standardized pipeline for fMRI data.</description>
+    <pubDate>Sun, 18 May 2025 20:49:38 GMT</pubDate>
+  </item><item>
+    <title>LRZ Cloud Computing</title>
+    <link>https://quartz.jzhao.xyz/Server-and-Software/LRZ-Cloud-Computing</link>
+    <guid>https://quartz.jzhao.xyz/Server-and-Software/LRZ-Cloud-Computing</guid>
+    <description>The following information is useful for those who can access Linux cluster at LRZ.de Access Cloud Computing Msense Lab also has two cloud computing systems, Lora and Emma.</description>
+    <pubDate>Fri, 04 Apr 2025 13:58:52 GMT</pubDate>
+  </item><item>
+    <title>Basic Linux Commands</title>
+    <link>https://quartz.jzhao.xyz/Server-and-Software/Basic-Linux-Commands</link>
+    <guid>https://quartz.jzhao.xyz/Server-and-Software/Basic-Linux-Commands</guid>
+    <description>1 Basic commands Shells such as Bash, Zsh, and Tcsh provide powerful command-line environments for Unix-like systems, each with its own syntax and features.</description>
+    <pubDate>Sun, 23 Mar 2025 19:34:19 GMT</pubDate>
   </item>
     </channel>
   </rss>
