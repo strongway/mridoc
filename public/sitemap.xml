@@ -29,7 +29,7 @@
     <loc>https://quartz.jzhao.xyz/fMRI-Tutorial/2.2-BIDS-Structure</loc>
     <lastmod>2025-03-17T22:41:37.915Z</lastmod>
   </url><url>
-    <loc>https://quartz.jzhao.xyz/fMRI-Tutorial/2.3-Preprocessing-with-fmriPrep</loc>
+    <loc>https://quartz.jzhao.xyz/fMRI-Tutorial/2.3-fmriPrep-with-Docker</loc>
     <lastmod>2025-03-17T22:41:58.625Z</lastmod>
   </url><url>
     <loc>https://quartz.jzhao.xyz/fMRI-Tutorial/2.4-Quality-Control-with-MRIQC</loc>
