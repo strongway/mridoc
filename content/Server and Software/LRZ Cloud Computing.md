@@ -6,6 +6,13 @@ tags:
   - HPC
 ---
 The following information is useful for those who can access Linux cluster at LRZ.de
+
+> [!note]
+> **Apptainer vs Singularity.** Apptainer is the community fork of Singularity; the two CLIs are drop-in compatible for everything we do (same `build`, `run`, `exec`, `shell`, `--bind`, `--cleanenv` flags). The lab convention is:
+> - On **workstations** (`Lora`, `Emma`) and modern HPC sites: use `apptainer`.
+> - On the **LRZ Linux cluster**: the module is still `singularity` — use that name there. Commands below labelled "on LRZ" use `singularity` deliberately.
+> See also [[2.3 fmriPrep with Docker]] for the canonical container-run pattern and env-var conventions (`$BIDS_DIR`, `$DERIVS_DIR`, `$FMRIPREP_DIR`, `$WORK_DIR`, `$FS_LICENSE`).
+
 ## Access Cloud Computing
 
 Msense Lab also has two cloud computing systems, `Lora` and `Emma`. `Emma` is accessible from the external internet, while `Lora` is walled by the intranet. 
@@ -144,8 +151,17 @@ https://doku.lrz.de/job-processing-on-the-linux-cluster-10745970.html
 Status here:
 https://doku.lrz.de/high-performance-computing-10613431.html
 
-### 2. Install singularity
-When logged in to the Linux cluster (on the login nodes), you can follow this recipe (this has been done):  
+### 2. Install / load singularity on LRZ
+
+On the LRZ Linux cluster the container runtime module is still named **`singularity`** (not `apptainer`). The CLI is identical — `apptainer` and `singularity` accept the same flags, so any recipe from [[2.3 fmriPrep with Docker]] works here by substituting the binary name.
+
+**Discover the available version** before loading:
+```bash
+module spider singularity   # list all versions and how to load each
+module avail singularity    # show what is loadable in the current module set
+```
+
+The recipe below has already been run for the lab account; you normally only need the *Usage* block. When logged in to the Linux cluster (on the login nodes):
 
 ```
 module rm intel-mpi intel-mkl intel  
@@ -155,13 +171,27 @@ spack load squashfs squashfuse
 spack install singularity ~suid  
 spack -c"modules:tcl:blacklist_implicits:False" module tcl refresh --upstream-modules squashfs singularity
 ```
-Usage later is then simple (new terminal/or in a Slurm Job):  
-```  
-
-module use spack/modules/x86_avx2/linux-sles15-haswell   
-module load singularity squashfs  
-
+**Usage** (new terminal or inside a SLURM job):
+```bash
+module use spack/modules/x86_avx2/linux-sles15-haswell
+module load singularity squashfs
 ```
+
+> [!tip]
+> **Build vs pull.** Prefer `singularity build` (or `apptainer build` on workstations) over `singularity pull` — `build` is more reliable, especially for multi-layer Docker images:
+> ```bash
+> singularity build $CONTAINER_DIR/fmriprep-<VER>.sif docker://nipreps/fmriprep:<VER>
+> ```
+> On a workstation the equivalent is `apptainer build ... docker://...`.
+
+> [!info]
+> **LRZ storage tiers.**
+> - `$HOME` — small quota, backed up. Fine for scripts, configs, `.sif` files if they fit.
+> - **DSS** (`/dss/...`, refer to it as `$DSS_DIR` in your scripts; never hardcode `/dss/youraccount`) — large, project-shared. Best place for BIDS datasets, derivatives, and `.sif` containers shared across users.
+> - **SCRATCH** — fastest, *not* backed up, periodically purged. Use for `$WORK_DIR` (fMRIPrep working dirs, temporary intermediates).
+>
+> Rule of thumb: containers in DSS or HOME; raw and derived data in DSS; transient working dirs in SCRATCH.
+
 ### 3. Slurm partition and job settings
 
 The following information needs to be updated; please check lrz.
@@ -211,7 +241,42 @@ free -h
 
 #### submit to slurm
 
-```
+```bash
 sbatch sing_cluster.sh
 ```
+
+A minimal `sing_cluster.sh` for a single-subject container run on LRZ — note `--cleanenv` and the use of env-var placeholders rather than hardcoded paths:
+
+```bash
+#!/bin/bash
+#SBATCH --clusters=cm2
+#SBATCH --partition=cm2_std
+#SBATCH --qos=cm2_std
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=32G
+#SBATCH --time=24:00:00
+
+module use spack/modules/x86_avx2/linux-sles15-haswell
+module load singularity squashfs
+
+export DSS_DIR=/dss/<your-project>          # placeholder — set for your account
+export BIDS_DIR=$DSS_DIR/bids
+export DERIVS_DIR=$DSS_DIR/derivatives
+export FMRIPREP_DIR=$DERIVS_DIR/fmriprep
+export WORK_DIR=$SCRATCH/work               # SCRATCH for transient I/O
+export FS_LICENSE=$HOME/license.txt
+
+singularity run --cleanenv \
+    -B $BIDS_DIR:/data:ro \
+    -B $DERIVS_DIR:/out \
+    -B $WORK_DIR:/work \
+    -B $FS_LICENSE:/opt/freesurfer/license.txt \
+    $DSS_DIR/containers/fmriprep-<VER>.sif \
+    /data /out participant \
+    --participant-label ${SLURM_ARRAY_TASK_ID} \
+    -w /work --fs-license-file /opt/freesurfer/license.txt
+```
+
+For multi-subject processing, use a SLURM **array job** (`#SBATCH --array=1-30`) — see the canonical pattern in [[2.3 fmriPrep with Docker]] and adapt the `--participant-label` line accordingly.
 

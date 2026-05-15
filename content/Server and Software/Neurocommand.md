@@ -5,18 +5,38 @@ tags:
   - Neurocommand
 ---
 
-Neurocommand is a command-line interface to [Neurodesk](https:/neurodesk.org), which is designed to run on virtual machine or HPC. 
+Neurocommand is a command-line interface to [Neurodesk](https://neurodesk.org), which is designed to run on virtual machines or HPC.
 
-To get NeuroCommand to work, you need to tell the bash shell system where to find the singularity folder and modules. For those set up users, the following codes are already in your `.bashrc`. 
+> [!note]
+> **Neurocommand vs Neurodesk.** *Neurodesk* is the full containerised desktop (graphical environment, comes with everything pre-wired). *Neurocommand* is the lightweight `module`-style wrapper that exposes the same Neurodesk container collection on the command line — no desktop, just `module load fsl` etc. We use Neurocommand on our lab servers; reach for full Neurodesk only when you genuinely need the GUI desktop.
+
+> [!note]
+> **Apptainer first, Singularity fallback.** Neurodesk's modern docs assume **Apptainer**. On lab workstations use `module load apptainer` and set `APPTAINER_*` env vars. On the LRZ Linux cluster the module is still `singularity` — keep the `SINGULARITY_*` variables there. The CLIs are interchangeable; see [[LRZ Cloud Computing]] and [[2.3 fmriPrep with Docker]].
+
+To get Neurocommand to work, you need to tell the bash shell system where to find the container folder and modules. For set-up users the following lines are already in your `.bashrc` (workstation, Apptainer):
 
 ```bash
 export PATH=~/bin:/usr/local/go/bin:${PATH}
 source /etc/profile.d/lmod.sh
 
-export SINGULARITY_BINDPATH='/cvmfs,/mnt,/home,/dss'
-export SINGULARITYENV_TEMPLATEFLOW_HOME=/dss/.templateflow
+# Apptainer (workstations) — same variable names with APPTAINER_ prefix
+export APPTAINER_BINDPATH='/cvmfs,/mnt,/home,/dss'
+export APPTAINERENV_TEMPLATEFLOW_HOME=/dss/.templateflow
 module use /cvmfs/neurodesk.ardc.edu.au/neurodesk-modules/*
 ```
+
+On the LRZ cluster (or any host still using Singularity) substitute `SINGULARITY_BINDPATH` / `SINGULARITYENV_TEMPLATEFLOW_HOME` / `module load singularity` — the rest is identical.
+
+> [!warning]
+> The container module path `/cvmfs/neurodesk.ardc.edu.au/containers/modules/` is served via **CVMFS** and may not be mounted on every system. If `ls /cvmfs/neurodesk.ardc.edu.au` is empty, CVMFS is not available there — ask the admins or fall back to a locally built container (see [[2.3 fmriPrep with Docker]] and [[Software Versions]] for pinned versions used by the lab).
+
+> [!tip]
+> List everything Neurocommand exposes after sourcing the init script:
+> ```bash
+> module avail              # all modules in the current MODULEPATH
+> module avail fsl          # filter by name
+> module spider fmriprep    # show all versions and how to load them
+> ```
 
 ## 1 Command line and bash file usage
 
@@ -36,7 +56,10 @@ Currently Loaded Modules:
   1) fsl/6.0.7.16
 ```
 
-`module avail` can show all modules available from the Neurocommand. 
+`module avail` shows all modules available from Neurocommand; `module spider <name>` lists every version of a single tool and tells you exactly how to load it.
+
+> [!tip]
+> When you launch a tool through a Neurocommand module, it runs inside an Apptainer/Singularity container under the hood. If you build your own ad-hoc `apptainer run` command for a similar workflow, pass `--cleanenv` so your shell variables don't leak in and confuse the container — same convention as in [[2.3 fmriPrep with Docker]].
 
 **Scenario 1: Interactive Analysis**
 
@@ -82,15 +105,17 @@ echo "Brain extraction completed for all subjects."
 
 ## 2 Use in Python
 
-Unfortunately, the Python environment cannot directly read the bash environment. So you need to set up the environment first in your Python. If you are using Jupyter Notebook, copy the following code to the beginning of your notebook:
+Python does not inherit the bash module environment automatically, so you have to recreate it at the top of your script or notebook. On a workstation (Apptainer):
 
 ```python
 import os
-os.environ["SINGULARITY_BINDPATH"] = "/cvmfs,/mnt,/home,/home/lu32pog/dss"
+os.environ["APPTAINER_BINDPATH"] = "/cvmfs,/mnt,/home,$HOME/dss"  # adjust to your account
 os.environ["LMOD_CMD"] = "/usr/share/lmod/lmod/libexec/lmod"
-os.environ["SINGULARITYENV_TEMPLATEFLOW_HOME"] = "/home/lu32pog/dss/.templateflow"
+os.environ["APPTAINERENV_TEMPLATEFLOW_HOME"] = f"{os.environ['HOME']}/dss/.templateflow"
 os.environ["MODULEPATH"] = "/cvmfs/neurodesk.ardc.edu.au/neurodesk-modules/*"
 ```
+
+On LRZ (still Singularity), swap the two `APPTAINER*` lines for `SINGULARITY_BINDPATH` and `SINGULARITYENV_TEMPLATEFLOW_HOME`.
 
 Then you can load modules via `lmod`
 ```python

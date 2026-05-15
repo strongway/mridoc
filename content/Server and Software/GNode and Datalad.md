@@ -1,10 +1,15 @@
 ---
-title: 1.2 GNode and Datalad
+title: GNode and Datalad
 draft: false
 tags:
   - GNode
   - Datalad
+  - git-annex
+  - data-management
 ---
+
+> [!info] datalad vs git-annex vs git
+> **git** tracks code and other small text files. **git-annex** tracks the *content addresses* of large binary files, so the git repository stays small while you still version huge data. **DataLad** wraps git + git-annex into a user-friendly tool for neuroimaging — datasets are git repositories whose data is fetched on demand. **GNode** (via GIN) is an LMU-hosted service that speaks this protocol. See [[Git Annex]] for the underlying mechanics.
 
 ## 1. G-Node 
 
@@ -23,7 +28,7 @@ Management of scientific data, including consistent organization, annotation, an
 
 Please see the [official website]( https://gin.g-node.org/G-Node/Info/wiki/GIN+CLI+Setup) for installations. For Mac OS users, the easiest way to install the client on macOS is via [homebrew](https://brew.sh/). G-Node homebrew formulae are maintained in the [G-Node tap](https://github.com/g-node/homebrew-pkg). Install the client, including any dependencies, with:
 
-```
+```bash
 brew tap g-node/pkg
 brew install g-node/pkg/gin-cli
 ```
@@ -36,20 +41,20 @@ Once you've installed git-annex, simply download the [gin client for macOS](htt
 
 1. register g-node.org website and sign into the [GIN Server](https://gin.g-node.org/user/login).
 2.  Create a new repository using the "+" on the top right. Alterantively, you can create locally:
-```
+```bash
 gin create <repository name>
 ```
 3. Copy new files into the newly created directory via Drag & Drop, Copy & Paste etc.
 4.  In the GIN client (terminal) window, navigate into the newly created local workspace by typing `cd <repository name>`. 
 5. Upload the new files using
 
-```
+```bash
  gin upload .
 ```
 
 Note the period at the end of the command. This command will _commit_ your changes. In other words, it will detect the new files in the directory, add them to the repository, and start uploading to the GIN server. Every time you perform a `gin upload .` the changes are saved and uploaded and a _checkpoint_ is made of your data.
 You can instead upload individual files or directories by listing them on the command line. For example:    
-```
+```bash
     gin upload file1.data recordings/recording1.h5
 ```
  
@@ -57,7 +62,7 @@ You can instead upload individual files or directories by listing them on the co
 
  Note that _upload_ here doesn't only mean sending new files and changes to the server. This command sends _all_ changes made in the directory to the server, including deletions, renames, etc. Therefore, if you delete files from the directory on your computer and perform a `gin upload`, the deletion will also be sent and the file will be removed from the server as well. Such changes can be synchronized without uploading any new files by not specifying any files or directories.
 
-```
+```bash
     gin upload
 ```
 
@@ -65,7 +70,7 @@ You can instead upload individual files or directories by listing them on the co
 
 If changes are made to your data elsewhere, for example on another computer (assuming they were uploaded to the server), or from another user that you share your data with, you can download these changes by typing the download command from within the repository.
 
-```
+```bash
 gin download
 ```
 
@@ -73,7 +78,7 @@ This command will only download changes made to the repository (file deletions, 
 
 If you would like to download _all_ the data contained in a repository, you can do so using the `--content` flag.
 
-```
+```bash
 gin download --content
 ```
 
@@ -105,18 +110,72 @@ DataLad only cares (knows) about two things: **Datasets** and **files**. A datas
 DataLad can manage Gnode repository, see [Gin and DataLad](https://handbook.datalad.org/en/latest/basics/101-139-gin.html). 
 
 Basic usage:
-```
+
+```bash
 datalad save -m 'save something'
-datalad update 
+datalad update
 datalad push
 ```
 
-This is similar to the follow traditional git commands
+This mirrors the traditional git commands
 
-```
+```bash
 git add
 git commit
 git pull
 git push
 ```
+
+> [!warning] `datalad save` vs `git commit`
+> A common pitfall: students try to commit changes to annexed data with plain `git commit -am ...` and end up with an inconsistent state — git tracks the small symlink/pointer files, but git-annex tracks the actual content. **Always use `datalad save -m "msg"`** inside a DataLad dataset. It calls both `git add` and `git annex add` correctly depending on file type, then commits. Use `git commit` only when you're absolutely sure all changes are pure text (e.g. editing a README).
+
+### A typical fMRI workflow with DataLad
+
+The story: clone a study dataset hosted on GNode, fetch only the subjects you need, run a container, save the derivatives, push them back.
+
+```bash
+# 1. Clone the dataset skeleton (small — only the git history and pointers)
+datalad clone https://gin.g-node.org/<lab>/<study>.git $BIDS_DIR
+cd $BIDS_DIR
+
+# 2. Inspect what's there; nothing big has been downloaded yet
+ls sub-*
+
+# 3. Fetch only the subjects you'll analyze
+datalad get sub-01 sub-02 sub-03
+
+# 4. Run preprocessing in a container; --cleanenv keeps the host env from leaking in
+apptainer run --cleanenv \
+    -B $BIDS_DIR:/data \
+    -B $FMRIPREP_DIR:/out \
+    fmriprep.sif /data /out participant --participant-label 01
+
+# 5. Record the derivatives in the dataset
+datalad save -m "fMRIPrep derivatives for sub-01" $FMRIPREP_DIR
+
+# 6. Drop large raw files you no longer need locally (they stay on the remote)
+datalad drop sub-01/func/*_bold.nii.gz
+
+# 7. Push your changes (git history + annexed content) back to GNode
+datalad push --to origin
+```
+
+> [!tip] Provenance
+> Wrapping commands in `datalad run -m "msg" -- <command>` records the exact call into the dataset history, so anyone who later runs `datalad rerun` reproduces your step. Worth the small extra typing.
+
+### Cluster considerations
+
+On the LRZ cluster (see [[LRZ Cloud Computing]]) and inside containers, two things bite:
+
+- **Annexed files are symlinks** into `.git/annex/objects/`. If you bind-mount only the subject directory into a container, the symlink targets disappear. Bind the dataset root, not a subdirectory:
+
+  ```bash
+  apptainer run --cleanenv -B $BIDS_DIR:$BIDS_DIR fmriprep.sif ...
+  ```
+
+  This keeps the relative symlinks valid inside the container.
+
+- **Object store on shared storage**: `.git/annex/objects/` can get large. If your home quota is tight, configure git-annex to keep the store on scratch and symlink it in, or use `git annex move` to relocate.
+
+See [[Git Annex]] for the underlying commands these wrappers call.
 
