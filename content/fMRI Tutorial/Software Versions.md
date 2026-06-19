@@ -25,31 +25,33 @@ A practical rule for the course: **record the exact versions in your project REA
 
 ## Recommended pins
 
-| Tool | Pinned version | Notes |
-| --- | --- | --- |
-| Python | 3.11 | 3.10 minimum; 3.12 works but is less tested with Nipype |
-| fMRIPrep | 24.1.1 | Confound column names changed from v23 |
-| MRIQC | 24.0.x | Pair with the fMRIPrep major version where possible |
-| FSL | 6.0.7.x | Tutorials [[4.1 First-level Analysis with FSL]] and [[4.2 High-level Analysis with FSL]] assume this |
-| AFNI | latest stable build | Rolling release — record the build date with `afni -ver` |
-| SPM12 | not required | Mentioned only for comparison; install only if you follow the optional Nipype SPM track |
-| dcm2bids | 3.x | Uses dcm2niix under the hood |
-| dcm2niix | latest stable | Updated alongside dcm2bids |
-| BIDS specification | 1.10.x | See [[2.2 BIDS Structure]] |
-| bids-validator | ≥ 2.0 | The Deno-based v2 validator replaces the old Node CLI |
-| BIDS Stats Models | 1.0.0 | Required by recent FitLins |
-| nilearn | 0.10.x | See flag below |
-| nibabel | 5.x | |
-| numpy | 1.26 or 2.x | Both supported; pin one per project |
-| pandas | 2.x | |
-| matplotlib | ≥ 3.8 | |
-| Nipype | 1.8.x | Optional drafts (Nipype Basics, Nipype for 1st-level fMRI analysis); expect minor breakage |
-| FitLins | 0.11.x | Pin explicitly; consumes BIDS Stats Models v1.0. Run inside a container for reproducibility |
-| templateflow | ≥ 24.2.x | fMRIPrep and MRIQC delegate template downloads to templateflow; an older templateflow can fetch a different *default* template than the version pinned in fMRIPrep, silently changing your normalisation target |
-| FreeSurfer | ≥ 7.4.x | fMRIPrep delegates surface reconstruction to FreeSurfer's `recon-all`. The FS license file must be available (see `$FS_LICENSE` in [[2.3 fmriPrep with Docker]]) |
-| Apptainer / Singularity | ≥ 1.3 | Preferred on HPC over Docker |
-| Docker | ≥ 24 | For local runs on laptops |
-| Node.js | ≥ 22 | Only needed to build this Quartz site, not for analyses |
+| Tool                    | Pinned version      | Notes                                                                                                                                                                                                           |
+| ----------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Python                  | 3.11                | Course default for `uv` environments; 3.10 minimum                                                                                                                                                              |
+| uv                      | ≥ 0.8               | Preferred Python environment/package manager for tutorial code                                                                                                                                                  |
+| fMRIPrep                | 24.1.1              | Confound column names changed from v23                                                                                                                                                                          |
+| MRIQC                   | 24.0.x              | Pair with the fMRIPrep major version where possible                                                                                                                                                             |
+| FSL                     | 6.0.7.x             | Tutorials [[4.1 First-level Analysis with FSL]] and [[4.2 High-level Analysis with FSL]] assume this                                                                                                            |
+| AFNI                    | latest stable build | Rolling release — record the build date with `afni -ver`                                                                                                                                                        |
+| SPM12                   | not required        | Mentioned only for comparison; install only if you follow the optional Nipype SPM track                                                                                                                         |
+| heudiconv               | 1.4.x               | Prefer Singularity/Apptainer image for shared projects; see [[2.1 MRI Data Acquisition and Format]]                                                                                                             |
+| dcm2bids                | 3.x                 | Install with `uv`; uses dcm2niix under the hood                                                                                                                                                                 |
+| dcm2niix                | latest stable       | Install into the same `uv` environment as dcm2bids for teaching conversions                                                                                                                                     |
+| BIDS specification      | 1.10.x              | See [[2.2 BIDS Structure]]                                                                                                                                                                                      |
+| bids-validator          | ≥ 2.0               | The Deno-based v2 validator replaces the old Node CLI                                                                                                                                                           |
+| BIDS Stats Models       | 1.0.0               | Required by recent FitLins                                                                                                                                                                                      |
+| nilearn                 | 0.10.x              | See flag below                                                                                                                                                                                                  |
+| nibabel                 | 5.x                 |                                                                                                                                                                                                                 |
+| numpy                   | 1.26 or 2.x         | Both supported; pin one per project                                                                                                                                                                             |
+| pandas                  | 2.x                 |                                                                                                                                                                                                                 |
+| matplotlib              | ≥ 3.8               |                                                                                                                                                                                                                 |
+| Nipype                  | 1.8.x               | Optional drafts (Nipype Basics, Nipype for 1st-level fMRI analysis); expect minor breakage                                                                                                                      |
+| FitLins                 | 0.11.x              | Pin explicitly; consumes BIDS Stats Models v1.0. Run inside a container for reproducibility                                                                                                                     |
+| templateflow            | ≥ 24.2.x            | fMRIPrep and MRIQC delegate template downloads to templateflow; an older templateflow can fetch a different _default_ template than the version pinned in fMRIPrep, silently changing your normalisation target |
+| FreeSurfer              | ≥ 7.4.x             | fMRIPrep delegates surface reconstruction to FreeSurfer's `recon-all`. The FS license file must be available (see `$FS_LICENSE` in [[2.3 fmriPrep with Docker]])                                                |
+| Apptainer / Singularity | ≥ 1.3               | Preferred on HPC over Docker                                                                                                                                                                                    |
+| Docker                  | ≥ 24                | For local runs on laptops                                                                                                                                                                                       |
+| Node.js                 | ≥ 22                | Only needed to build this Quartz site, not for analyses                                                                                                                                                         |
 
 > [!warning]
 > Tutorial [[5.1 NiLearn fMRI Basic Analysis]] currently lists `nilearn 0.12+`. That version did not exist at the time of writing. Use **nilearn 0.10.x** until 0.11 / 0.12 ship and the tutorial is updated. The maintainer should confirm whether to upgrade the tutorial or downgrade the pin.
@@ -77,16 +79,33 @@ See [[2.3 fmriPrep with Docker]] and [[2.4 Quality Control with MRIQC]].
 
 ### Python stack
 
+Use `uv` rather than conda/pip installed directly into the shell:
+
 ```bash
-# Inside a fresh venv (python -m venv .venv && source .venv/bin/activate)
-pip install \
+uv init --bare --python "==3.11.*"
+uv python pin 3.11
+uv add \
   "nilearn==0.10.*" \
   "nibabel>=5,<6" \
   "numpy>=1.26" \
   "pandas>=2" \
   "matplotlib>=3.8" \
-  "nipype==1.8.*" \
-  "dcm2bids>=3,<4"
+  "nipype==1.8.*"
+```
+
+For DICOM-to-BIDS teaching conversions with dcm2bids:
+
+```bash
+uv add "dcm2bids>=3,<4" "dcm2niix>=1"
+uv run dcm2bids --version
+uv run dcm2niix -h
+```
+
+For a local heudiconv test environment, if you are not using the preferred container:
+
+```bash
+uv add "heudiconv[all]>=1.4,<2" dcm2niix
+uv run heudiconv --version
 ```
 
 ### FSL
@@ -120,11 +139,13 @@ Reproducibility is cheap if you do it from day one. Every project folder should 
 ### Python dependencies
 
 ```bash
-# Pip-based projects
-pip freeze > requirements.txt
+# uv-based projects
+uv lock
+uv export --format requirements-txt > requirements.txt
 
-# Conda-based projects
-conda env export --no-builds > environment.yml
+# Also record the interpreter and uv version
+uv --version >> versions.txt
+uv run python --version >> versions.txt
 ```
 
 ### Neuroimaging tools
@@ -164,23 +185,24 @@ apptainer pull docker://nipreps/fmriprep:${FMRIPREP_VERSION}
 apptainer pull docker://nipreps/mriqc:${MRIQC_VERSION}
 ```
 
-For Python projects, mirror the same idea in `pyproject.toml` or `environment.yml`:
+For Python projects, mirror the same idea in `pyproject.toml` plus `uv.lock`:
 
-```yaml
-# environment.yml
-name: fmri-course
-channels:
-  - conda-forge
-dependencies:
-  - python=3.11
-  - pip
-  - pip:
-      - nilearn==0.10.*
-      - nibabel>=5,<6
-      - nipype==1.8.*
-      - pandas>=2
-      - numpy>=1.26
+```toml
+# pyproject.toml
+[project]
+name = "fmri-course"
+version = "0.1.0"
+requires-python = "==3.11.*"
+dependencies = [
+  "nilearn==0.10.*",
+  "nibabel>=5,<6",
+  "nipype==1.8.*",
+  "pandas>=2",
+  "numpy>=1.26",
+]
 ```
+
+Then run `uv lock` and commit both files.
 
 ## When versions drift
 
