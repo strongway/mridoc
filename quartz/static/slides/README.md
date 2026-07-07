@@ -17,7 +17,8 @@ into this folder, then commit + push:
 
 ```bash
 cd <workspace>/sessions/session-2/slides
-npm run build                                            # Slidev 0.50.0, base = /  -> dist/
+# --base MUST be the served subpath, or the deck renders blank (assets 404 at site root)
+npx slidev build --base /static/slides/session-2/ --out dist slides.md
 DEST=<workspace>/tutorial-notes/mridoc/quartz/static/slides/session-2
 rm -rf "$DEST" && cp -r dist "$DEST"
 cd <workspace>/tutorial-notes/mridoc
@@ -31,10 +32,12 @@ should show the new bundle hash.
 
 ## Pitfalls
 
+- **Build with `--base /static/slides/session-N/`** — the deck's served subpath. Default
+  base `/` makes the HTML reference `/assets/...`, which 404s at the site root → **blank deck**.
 - **Deploy dir is `quartz/static/`**, not repo-root `static/` (see above).
 - **Rebuild before pushing** — editing `slides.md` alone publishes nothing new.
 - **Stay on Slidev `0.50.0`** — v0.52 doubles the base path → 404 past slide 1.
-- **Base is `/`**; keep the generated `_redirects` (`/*  /index.html  200`).
+- Keep the generated `_redirects` (`/*  /index.html  200`) for SPA routing.
 - **Referenced `./figures/*.png` must exist at build time** — regenerate figures first,
   or the image 404s on the live site.
 - **Self-contained `.html` viewers** (e.g. nilearn `view_img`) go in `quartz/static/media/`,
