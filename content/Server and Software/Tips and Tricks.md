@@ -125,7 +125,7 @@ apptainer run --cleanenv -B $FS_LICENSE:/opt/freesurfer/license.txt ...
 - **Windows line endings** in scripts you edited on a laptop cause cryptic `bad interpreter` errors. Fix with `dos2unix script.sh`.
 - **SSH key permissions.** `~/.ssh/id_*` must be `chmod 600`; otherwise `ssh` refuses to use the key.
 - **Locale issues** in older containers (`perl: warning: Setting locale failed`). The cheap workaround is `export LC_ALL=C` (or `APPTAINERENV_LC_ALL=C`) before the run.
-- **Confound selection** — see [[Confound Selection]] when copy-pasting columns between fMRIPrep versions; column names occasionally change.
+- **Confound selection** — see [[5.2 Confound Selection]] when copy-pasting columns between fMRIPrep versions; column names occasionally change.
 
 ## Where to ask for help
 
